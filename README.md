@@ -150,4 +150,4 @@ release gate, same as your unit tests.
 
 ---
 
-Built with Claude Code. Part of a 10-project series — see the repo root `PORTFOLIO.md`.
+Part of a 10-project AI-engineering portfolio.
