@@ -1,7 +1,7 @@
 {
-  "run_id": "support-ticket-triage-20260619-110242-58fa",
+  "run_id": "support-ticket-triage-20260619-133752-11d5",
   "suite_name": "Support Ticket Triage",
-  "created_at": "2026-06-19T11:02:42.244",
+  "created_at": "2026-06-19T13:37:52.130",
   "targets": [
     {
       "target_id": "small + basic",
@@ -3188,6 +3188,6 @@
       "total_tokens": 3979
     }
   ],
-  "git_sha": null,
-  "notes": "wk1: v2 few-shot baseline"
+  "git_sha": "172f4bf",
+  "notes": ""
 }

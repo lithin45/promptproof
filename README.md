@@ -8,49 +8,51 @@ outputs worse? PromptProof treats prompts like code: it runs an **eval suite**
 on every change, **scores** the outputs, **compares against a baseline**, and
 **fails CI** when quality drops.
 
-> Runs **fully offline with zero API keys** via a deterministic `MockProvider`.
-> Drop in `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` to evaluate real models.
+> Works with real models (Anthropic / OpenAI) **and** fully offline via a
+> deterministic `MockProvider` — so tests and the CI gate run with **zero API
+> keys or cost**.
 
-![PromptProof dashboard: score drift across runs, cost vs quality, and a model/prompt leaderboard](docs/dashboard.png)
+![PromptProof dashboard: real banking77 benchmark — accuracy by target, cost vs quality, and a leaderboard](docs/dashboard.png)
 
 ---
 
-## Why it matters
+## Real results: benchmarking Claude on banking77
 
-A small but growing number of teams have actually *owned* an LLM system in
-production and watched evals drift after a model bump. That discipline —
-eval-first development, regression gates, cost/quality tradeoffs — is what this
-project demonstrates end to end:
+To prove it works on real data, the [`banking77_intent`](examples/banking77_intent)
+example evaluates two **real Claude models** on **[banking77](https://github.com/PolyAI-LDN/task-specific-datasets)**
+— a recognized benchmark of real banking customer-support messages labeled with
+one of 77 intents. It pits a **basic vs few-shot** prompt against
+**Haiku vs Sonnet**, scored on exact-match accuracy + JSON-schema validity.
 
-- **Eval suites as config** — a dataset + targets (model × prompt) + weighted scorers, in YAML.
-- **7 built-in scorers** — structural, field-level, text, and **LLM-as-judge**.
-- **Regression detection** — diff any run against a baseline; trip on score / pass-rate drops.
-- **CI gate** — a GitHub Action that fails the PR when quality regresses.
-- **Cost, latency & token tracking** — because quality is meaningless without the price tag.
-- **Provider-agnostic** — `anthropic`, `openai`, or the offline `mock`.
+**Actual output** (50 test cases, `temperature=0`, scored by PromptProof):
 
-## Example results
+| Target | Accuracy | Pass rate | Cost (50 cases) |
+|---|---|---|---|
+| claude-sonnet-4-6 + basic   | **0.910** | 88% | $0.110 |
+| claude-sonnet-4-6 + fewshot | **0.910** | 88% | $0.122 |
+| claude-haiku-4-5 + basic    | 0.865 | 82% | **$0.038** |
+| claude-haiku-4-5 + fewshot  | 0.850 | 80% | $0.042 |
 
-The bundled example triages support tickets into structured JSON, pitting two
-prompts (basic vs few-shot) against two model tiers (small vs large). Real
-output from `promptproof run`:
+What the measurement surfaced — none of it obvious in advance:
 
-| Target | Score | Pass rate | Cost (USD) | Mean latency |
-|---|---|---|---|---|
-| large + fewshot | **0.959** | 100% | $0.0213 | 925 ms |
-| small + fewshot | **0.943** | 100% | $0.0009 | 345 ms |
-| large + basic | 0.863 | 71% | $0.0166 | 918 ms |
-| small + basic | 0.848 | 71% | $0.0007 | 338 ms |
+- **Few-shot examples didn't pay off here.** Sonnet scored *identically* with or
+  without them (the basic prompt is cheaper), and on Haiku few-shot was slightly
+  *worse* (0.865 → 0.850). The 3 examples added input cost for no accuracy gain.
+- **Sonnet beat Haiku by ~5 points** (0.910 vs 0.865) — model size mattered, but modestly.
+- **Best value: Haiku + basic — 86.5% at ~1/3 the cost** of Sonnet. Whether
+  that trade is worth it is now a *decision you can see*, not a guess.
 
-> **The insight a leaderboard like this surfaces:** the *small* model with a
-> few-shot prompt (0.943) all but matches the *large* model with the same prompt
-> (0.959) — at **1/24th the cost** — and beats the large model on a weak prompt.
-> Prompt quality outweighed model size here. You only learn that by measuring.
+> Methodology / honesty: a 50-case sample at `temperature=0`, single run — treat
+> it as a **directional** benchmark, not a published leaderboard. Everything is
+> reproducible: [`prepare.py`](examples/banking77_intent/prepare.py) rebuilds the
+> dataset + prompts + suites, and the run is one command.
 
-## The regression gate in action
+## The regression gate (demonstrated offline)
 
-Someone "refactors" the winning prompt and renames `category` → `type` (and
-drops `needs_human`). Re-run and compare:
+The whole point is catching regressions automatically. The
+[`support_ticket_triage`](examples/support_ticket_triage) example runs on the
+**offline mock** (so it costs nothing and runs in CI). Take a passing prompt,
+"refactor" it so it renames a field — then re-run:
 
 ```
 ## ❌ REGRESSION DETECTED — Support Ticket Triage
@@ -69,7 +71,7 @@ exit code = 1   # CI fails the PR
 flowchart LR
     S[suite.yaml<br/>dataset + targets + scorers] --> R[Runner]
     R -->|render prompt| P{Provider}
-    P -->|mock / anthropic / openai| L[(LLM)]
+    P -->|anthropic / openai / mock| L[(LLM)]
     L --> R
     R -->|parse JSON| SC[Scorers<br/>schema · field · judge]
     SC --> ST[(.promptproof/runs<br/>JSON history)]
@@ -80,56 +82,24 @@ flowchart LR
 
 ## Quickstart
 
+**Offline (no key needed):**
 ```bash
-pip install -e .                        # zero deps beyond PyYAML; no API keys needed
-
-# 1. Run the suite and pin this run as the baseline
+pip install -e .
 promptproof run examples/support_ticket_triage/suite.yaml --set-baseline
-
-# 2. Later, gate a change against that baseline (exits 1 on regression)
 promptproof run examples/support_ticket_triage/suite.yaml --fail-on-regression
-
-# Other commands
-promptproof list                        # all stored runs
-promptproof report                      # leaderboard for the latest run
-promptproof compare --candidate <id>    # diff any two runs
-promptproof export --out dashboard/public/data
 ```
 
-**Use real models** by changing a target's `provider`/`model` and exporting a key:
-
-```yaml
-targets:
-  - id: "gpt-4o-mini + v2"
-    provider: openai          # or anthropic
-    model: gpt-4o-mini
-    prompt: prompts/v2_fewshot.txt
-```
+**Real models:**
 ```bash
-pip install 'promptproof[live]'
-export OPENAI_API_KEY=sk-...
-promptproof run examples/support_ticket_triage/suite.yaml
+pip install -e '.[live]'
+cp .env.example .env          # then add your OPENAI_API_KEY or ANTHROPIC_API_KEY
+python examples/banking77_intent/prepare.py
+promptproof run examples/banking77_intent/suite.anthropic.yaml --set-baseline
 ```
 
-## Anatomy of a suite
-
-```yaml
-name: Support Ticket Triage
-dataset: dataset.jsonl
-targets:
-  - { id: "small + fewshot", provider: mock, model: mock-small, prompt: prompts/v2_fewshot.txt }
-scorers:
-  - name: json_schema
-    weight: 1
-    config: { required: [category, priority, sentiment, needs_human, summary], properties: {...} }
-  - name: field_exact
-    weight: 2
-    config: { field: category }       # the core task, weighted highest
-  - name: llm_judge
-    weight: 1
-    config: { field: summary, provider: mock, model: mock-large, threshold: 0.4 }
-thresholds: { max_score_drop: 0.02, max_pass_rate_drop: 0.05 }
-```
+Other commands: `promptproof list`, `report`, `compare --candidate <id>`,
+`baseline <id>`, `export --out dashboard/public/data`. Use `--limit N` for a
+cheap smoke test.
 
 ## Built-in scorers
 
@@ -143,55 +113,40 @@ thresholds: { max_score_drop: 0.02, max_pass_rate_drop: 0.05 }
 | `regex` | Output (or a field) matches a pattern |
 | `llm_judge` | A model grades a field against a reference (offline mock judge included) |
 
-Scorers register themselves, so adding one is a ~15-line file.
+Scorers self-register, so adding one is a ~15-line file.
 
-## CI gate
+## Dashboard
 
-`.github/workflows/promptproof.yml` runs the suite on every PR and fails the
-check on regression — the eval becomes a release gate, same as your unit tests.
+`dashboard/` (Vite + React + TypeScript + Recharts) reads exported run history
+and renders the leaderboard, accuracy/drift, and cost-vs-quality views above.
 
-## Project layout
-
-```
-promptproof/
-  providers/   mock · anthropic · openai   (pluggable LLM backends)
-  scorers/     structure · fields · text · judge   (self-registering)
-  runner.py    targets × cases × scorers, concurrent
-  compare.py   baseline regression detection
-  store.py     JSON run history under .promptproof/
-  cli.py       run · compare · report · list · baseline · export
-examples/support_ticket_triage/   runnable suite + dataset + 3 prompts
-dashboard/     Vite + React + TypeScript drift dashboard (Recharts)
-tests/         pytest (scorers, runner, regression)
+```bash
+promptproof export --out dashboard/public/data
+cd dashboard && npm install && npm run dev
 ```
 
 ## Design notes
 
-- **Offline-first.** The whole tool, its tests, and the demo run without network
-  or keys. The `MockProvider` is a tiny prompt-driven simulator: it reads the
-  JSON keys requested *in the prompt* and recognizes few-shot examples, so
-  different prompts/models produce genuinely different scores — and the
-  regression demo works with no API.
-- **Dependency-light.** The engine is standard library + PyYAML. Real providers
-  pull in `requests` only via the optional `[live]` extra.
+- **Offline-first.** The engine, tests, and CI run without network or keys. The
+  `MockProvider` is a prompt-driven simulator (it reads the JSON keys the prompt
+  asks for and recognizes few-shot examples), so the regression demo works with
+  no API.
+- **Resilient.** Real providers retry transient errors (HTTP 429/529 overload)
+  with exponential backoff — an eval that crashes on a blip reports false numbers.
+- **Dependency-light.** Engine = stdlib + PyYAML. Real providers pull in
+  `requests` only via the optional `[live]` extra.
 
-## Dashboard
+## CI gate
 
-The dashboard (Vite + React + TypeScript + Recharts) reads exported run history
-and renders the leaderboard, score-drift-over-time, and cost-vs-quality views
-above.
-
-```bash
-promptproof export --out dashboard/public/data   # refresh from your runs
-cd dashboard && npm install && npm run dev        # http://localhost:5173
-```
+[`.github/workflows/promptproof.yml`](.github/workflows/promptproof.yml) runs the
+offline suite on every PR and fails the check on regression — the eval becomes a
+release gate, same as your unit tests.
 
 ## Roadmap
 
-- HTML/Markdown PR comment with the diff table (not just exit code)
+- Markdown PR comment with the diff table (not just an exit code)
 - Embedding-similarity scorer (optional `[embeddings]` extra)
 - Per-case token/cost budgets and alerting
-- Parallel across targets, not just cases
 
 ---
 

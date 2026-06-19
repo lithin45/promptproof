@@ -13,6 +13,7 @@ Exit codes: 0 = ok, 1 = regression detected (for CI gating), 2 = usage error.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 
 from .compare import compare_runs
@@ -33,13 +34,29 @@ from .store import (
 )
 
 
+def _load_dotenv(path: str = ".env") -> None:
+    """Load KEY=VALUE pairs from a local .env into the environment (no override).
+
+    Keeps API keys out of the shell history and the codebase. .env is gitignored.
+    """
+    if not os.path.exists(path):
+        return
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            os.environ.setdefault(key.strip(), val.strip().strip('"').strip("'"))
+
+
 def _cmd_run(args) -> int:
     suite = load_suite(args.suite)
     print(
         f"▶ Running suite '{suite.name}' — {len(suite.targets)} target(s)…",
         file=sys.stderr,
     )
-    run = run_suite(suite, concurrency=args.concurrency, notes=args.notes or "")
+    run = run_suite(suite, concurrency=args.concurrency, notes=args.notes or "", limit=args.limit)
     path = save_run(run, args.root)
     print(format_run_markdown(run))
     print(f"\n💾 saved → {path}", file=sys.stderr)
@@ -124,18 +141,21 @@ def _cmd_export(args) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="promptproof", description="LLM eval & regression harness.")
-    p.add_argument("--root", default=".", help="Project root holding .promptproof/ (default: .)")
+    # Shared options available on every subcommand (so `run ... --root X` works).
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--root", default=".", help="Project root holding .promptproof/ (default: .)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    r = sub.add_parser("run", help="Run an eval suite.")
+    r = sub.add_parser("run", help="Run an eval suite.", parents=[common])
     r.add_argument("suite", help="Path to suite YAML/JSON.")
     r.add_argument("--concurrency", type=int, default=8)
     r.add_argument("--set-baseline", action="store_true", help="Save this run as the baseline.")
     r.add_argument("--fail-on-regression", action="store_true", help="Exit 1 if it regresses vs baseline.")
     r.add_argument("--notes", default="")
+    r.add_argument("--limit", type=int, default=None, help="Only run the first N cases (cheap smoke test).")
     r.set_defaults(func=_cmd_run)
 
-    c = sub.add_parser("compare", help="Compare a run to the baseline (exit 1 on regression).")
+    c = sub.add_parser("compare", help="Compare a run to the baseline (exit 1 on regression).", parents=[common])
     c.add_argument("--baseline", help="Baseline run id (default: stored baseline).")
     c.add_argument("--candidate", help="Candidate run id (default: latest run).")
     c.add_argument("--suite-name", help="Restrict 'latest' to this suite.")
@@ -143,17 +163,17 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--max-pass-drop", type=float, default=None)
     c.set_defaults(func=_cmd_compare)
 
-    rp = sub.add_parser("report", help="Print a leaderboard for a run.")
+    rp = sub.add_parser("report", help="Print a leaderboard for a run.", parents=[common])
     rp.add_argument("run_id", nargs="?", help="Run id (default: latest).")
     rp.set_defaults(func=_cmd_report)
 
-    sub.add_parser("list", help="List stored runs.").set_defaults(func=_cmd_list)
+    sub.add_parser("list", help="List stored runs.", parents=[common]).set_defaults(func=_cmd_list)
 
-    b = sub.add_parser("baseline", help="Set a run as the baseline.")
+    b = sub.add_parser("baseline", help="Set a run as the baseline.", parents=[common])
     b.add_argument("run_id")
     b.set_defaults(func=_cmd_baseline)
 
-    e = sub.add_parser("export", help="Export runs as JSON for the dashboard.")
+    e = sub.add_parser("export", help="Export runs as JSON for the dashboard.", parents=[common])
     e.add_argument("--out", default="dashboard/public/data")
     e.set_defaults(func=_cmd_export)
 
@@ -161,6 +181,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
+    _load_dotenv()
     args = build_parser().parse_args(argv)
     return args.func(args)
 

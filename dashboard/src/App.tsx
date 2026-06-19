@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
   Cell,
   Legend,
@@ -82,9 +84,11 @@ export default function App() {
   const current = runs.find((r) => r.run_id === selected) ?? runs[runs.length - 1];
   const sorted = [...current.targets].sort((a, b) => b.mean_score - a.mean_score);
   const best = sorted[0];
+  // "Best value" = the cheapest target within 5 points of the top score.
   const bestValue =
-    [...current.targets].filter((t) => t.pass_rate >= 1).sort((a, b) => a.total_cost_usd - b.total_cost_usd)[0] ??
-    best;
+    [...current.targets]
+      .filter((t) => t.mean_score >= best.mean_score - 0.05)
+      .sort((a, b) => a.total_cost_usd - b.total_cost_usd)[0] ?? best;
   const scatter = current.targets.map((t) => ({
     x: +(t.total_cost_usd * 1000).toFixed(3),
     y: t.mean_score,
@@ -118,7 +122,7 @@ export default function App() {
       <section className="kpis">
         <Kpi label="Best score" value={best.mean_score.toFixed(3)} sub={best.target_id} accent="#34d399" />
         <Kpi
-          label="Best value · 100% pass"
+          label="Best value · within 5 pts"
           value={`$${bestValue.total_cost_usd.toFixed(4)}`}
           sub={bestValue.target_id}
           accent="#38bdf8"
@@ -133,30 +137,52 @@ export default function App() {
       </section>
 
       <section className="grid2">
-        <Card title="Score drift across runs">
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={drift} margin={{ left: -12, right: 12, top: 8 }}>
-              <CartesianGrid stroke="#1b2433" strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fill: "#7d8aa0", fontSize: 10 }} angle={-12} textAnchor="end" height={54} />
-              <YAxis domain={[0.5, 1]} tick={{ fill: "#7d8aa0", fontSize: 11 }} />
-              <Tooltip contentStyle={tipStyle} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              {targetIds.map((id) => (
-                <Line
-                  key={id}
-                  type="monotone"
-                  dataKey={id}
-                  stroke={colorFor(id, targetIds)}
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                  activeDot={{ r: 5 }}
-                  isAnimationActive={false}
-                />
-              ))}
-            </LineChart>
-          </ResponsiveContainer>
-          <p className="caption">The dip is a broken prompt (category→type) caught by the eval gate, then reverted.</p>
-        </Card>
+        {runs.length >= 2 ? (
+          <Card title="Score drift across runs">
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={drift} margin={{ left: -12, right: 12, top: 8 }}>
+                <CartesianGrid stroke="#1b2433" strokeDasharray="3 3" />
+                <XAxis dataKey="name" tick={{ fill: "#7d8aa0", fontSize: 10 }} angle={-12} textAnchor="end" height={54} />
+                <YAxis domain={[0.5, 1]} tick={{ fill: "#7d8aa0", fontSize: 11 }} />
+                <Tooltip contentStyle={tipStyle} />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                {targetIds.map((id) => (
+                  <Line
+                    key={id}
+                    type="monotone"
+                    dataKey={id}
+                    stroke={colorFor(id, targetIds)}
+                    strokeWidth={2}
+                    dot={{ r: 3 }}
+                    activeDot={{ r: 5 }}
+                    isAnimationActive={false}
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+            <p className="caption">Each line tracks a target's score across runs — watch for drops.</p>
+          </Card>
+        ) : (
+          <Card title="Accuracy by target">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={sorted.map((t) => ({ name: t.target_id.replace("claude-", ""), score: t.mean_score }))}
+                margin={{ left: -12, right: 12, top: 8 }}
+              >
+                <CartesianGrid stroke="#1b2433" strokeDasharray="3 3" />
+                <XAxis dataKey="name" tick={{ fill: "#7d8aa0", fontSize: 9 }} angle={-12} textAnchor="end" height={60} interval={0} />
+                <YAxis domain={[0, 1]} tick={{ fill: "#7d8aa0", fontSize: 11 }} />
+                <Tooltip contentStyle={tipStyle} cursor={{ fill: "#ffffff10" }} />
+                <Bar dataKey="score" isAnimationActive={false} radius={[4, 4, 0, 0]}>
+                  {sorted.map((t, i) => (
+                    <Cell key={i} fill={colorFor(t.target_id, targetIds)} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="caption">Real banking77 accuracy per model × prompt. Add runs to unlock drift-over-time.</p>
+          </Card>
+        )}
 
         <Card title="Cost vs quality · selected run">
           <ResponsiveContainer width="100%" height={300}>

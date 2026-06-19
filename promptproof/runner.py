@@ -74,8 +74,10 @@ def _aggregate(target: Target, cases: list[CaseResult]) -> TargetResult:
     )
 
 
-def run_suite(suite: Suite, cases=None, concurrency: int = 4, notes: str = "") -> RunResult:
+def run_suite(suite: Suite, cases=None, concurrency: int = 4, notes: str = "", limit=None) -> RunResult:
     cases = cases if cases is not None else load_dataset(suite)
+    if limit:
+        cases = cases[:limit]
     scorers = [get_scorer(s) for s in suite.scorers]
 
     target_results: list[TargetResult] = []

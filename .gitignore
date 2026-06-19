@@ -15,5 +15,10 @@ dist/
 # so we keep .promptproof/baselines/ but ignore the per-run history.
 .promptproof/runs/
 
+# Secrets — NEVER commit API keys
+.env
+.env.*
+!.env.example
+
 # OS
 .DS_Store

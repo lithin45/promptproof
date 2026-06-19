@@ -6,6 +6,7 @@ plus the bookkeeping an eval harness cares about: tokens, cost, latency.
 
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass
 
 
@@ -27,6 +28,27 @@ class Provider:
 def cost_usd(tokens_in: int, tokens_out: int, price_in: float, price_out: float) -> float:
     """price_* are USD per 1M tokens."""
     return tokens_in / 1_000_000 * price_in + tokens_out / 1_000_000 * price_out
+
+
+def with_retry(do_request, max_retries: int = 4, retry_on=(429, 500, 502, 503, 529)):
+    """Call do_request() (-> a requests.Response), retrying transient API errors
+    (rate limits, overload) with exponential backoff. Raises on final failure.
+
+    Production LLM APIs return 429/529 under load; an eval harness that crashes on
+    those produces misleading scores, so we retry instead.
+    """
+    delay = 1.0
+    resp = None
+    for attempt in range(max_retries):
+        resp = do_request()
+        if resp.status_code in retry_on and attempt < max_retries - 1:
+            time.sleep(delay)
+            delay = min(delay * 2, 8.0)
+            continue
+        resp.raise_for_status()
+        return resp
+    resp.raise_for_status()
+    return resp
 
 
 _REGISTRY: dict[str, type[Provider]] = {}

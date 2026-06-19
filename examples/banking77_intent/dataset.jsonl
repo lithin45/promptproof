@@ -1,0 +1,50 @@
+{"id": "b001", "input": "Can I top up using my car?", "expected": {"category": "topping_up_by_card"}}
+{"id": "b002", "input": "Will I be charged if someone needs to send me money?", "expected": {"category": "top_up_by_bank_transfer_charge"}}
+{"id": "b003", "input": "I would like to know why my purchases from this morning are still pending.", "expected": {"category": "pending_card_payment"}}
+{"id": "b004", "input": "My top-up failed, WHY?", "expected": {"category": "top_up_failed"}}
+{"id": "b005", "input": "What is the \u20ac1 fee for?", "expected": {"category": "extra_charge_on_statement"}}
+{"id": "b006", "input": "I need it delivered on a certain date.", "expected": {"category": "card_delivery_estimate"}}
+{"id": "b007", "input": "I want to transfer money to a beneficiery. Why can't I?", "expected": {"category": "beneficiary_not_allowed"}}
+{"id": "b008", "input": "I tried using my card today and it's not working, can you help me?", "expected": {"category": "card_not_working"}}
+{"id": "b009", "input": "There is a suspicious direct debit payment.", "expected": {"category": "direct_debit_payment_not_recognised"}}
+{"id": "b010", "input": "Is there a verification code for the top-up card?", "expected": {"category": "verify_top_up"}}
+{"id": "b011", "input": "how long does it take to post atm with drawl", "expected": {"category": "pending_cash_withdrawal"}}
+{"id": "b012", "input": "How long does a transfer take from china?", "expected": {"category": "transfer_timing"}}
+{"id": "b013", "input": "I transferred some money but the recipient is having trouble withdrawing.", "expected": {"category": "transfer_not_received_by_recipient"}}
+{"id": "b014", "input": "The incorrect rate was used in my foreign purchase", "expected": {"category": "card_payment_wrong_exchange_rate"}}
+{"id": "b015", "input": "Will it automatically top-up if there isn't much money left?", "expected": {"category": "automatic_top_up"}}
+{"id": "b016", "input": "Do you have any idea on when I will receive my refund? I got my statement and it was not there.", "expected": {"category": "Refund_not_showing_up"}}
+{"id": "b017", "input": "I am chatting about an order from a long while back.  I never got it to this day and am deeply upset by this!  I want all of my money back!  I just can not accept paying for something I never got.", "expected": {"category": "request_refund"}}
+{"id": "b018", "input": "How long will it take to deliver something to US?", "expected": {"category": "card_delivery_estimate"}}
+{"id": "b019", "input": "Can I use my card everywhere?", "expected": {"category": "card_acceptance"}}
+{"id": "b020", "input": "Can someone assist me by explaining why my card is not working?", "expected": {"category": "card_not_working"}}
+{"id": "b021", "input": "What different ways are there for someone to send me money?", "expected": {"category": "receiving_money"}}
+{"id": "b022", "input": "Why could my transfer have been declined?", "expected": {"category": "declined_transfer"}}
+{"id": "b023", "input": "Do you support all fiat currencies?", "expected": {"category": "fiat_currency_support"}}
+{"id": "b024", "input": "Why didn't my transfer go through?", "expected": {"category": "failed_transfer"}}
+{"id": "b025", "input": "How old do you have to be to be able to open an account?", "expected": {"category": "age_limit"}}
+{"id": "b026", "input": "Is my currency okay to add money with?", "expected": {"category": "supported_cards_and_currencies"}}
+{"id": "b027", "input": "I need the right foreign money, at the right rate, at ATMs, when I go abroad.", "expected": {"category": "wrong_exchange_rate_for_cash_withdrawal"}}
+{"id": "b028", "input": "A wrong exchange rate was applied to a transaction made abroad.", "expected": {"category": "wrong_exchange_rate_for_cash_withdrawal"}}
+{"id": "b029", "input": "Can someone assist me with the details explaining which fiat currencies that you support?", "expected": {"category": "fiat_currency_support"}}
+{"id": "b030", "input": "Why do I have to verify the top-up that I started?", "expected": {"category": "verify_top_up"}}
+{"id": "b031", "input": "Is there a verification code for top-ups?", "expected": {"category": "verify_top_up"}}
+{"id": "b032", "input": "How long will this card payment stay pending?", "expected": {"category": "pending_card_payment"}}
+{"id": "b033", "input": "Hey I tried to get some money out earlier but the machine didn't work. Now just saw the transaction still seems in progress! Can you please check what's going there, seems something is broken, I don't want to be charged for money that I haven't actually received!", "expected": {"category": "pending_cash_withdrawal"}}
+{"id": "b034", "input": "Tell me which cards and what currency is supported.", "expected": {"category": "supported_cards_and_currencies"}}
+{"id": "b035", "input": "For some reason my account's been charged an extra dollar.", "expected": {"category": "extra_charge_on_statement"}}
+{"id": "b036", "input": "dont understand why transfer failed", "expected": {"category": "failed_transfer"}}
+{"id": "b037", "input": "Can you assist me with unblocking my PIN? I put it in wrong too many times.", "expected": {"category": "pin_blocked"}}
+{"id": "b038", "input": "Since my id hasn't been verified, when can I use my account?", "expected": {"category": "why_verify_identity"}}
+{"id": "b039", "input": "I want a refund for my purchase", "expected": {"category": "request_refund"}}
+{"id": "b040", "input": "It didnt work when I tried to pay contactless at the bus today. Why?", "expected": {"category": "contactless_not_working"}}
+{"id": "b041", "input": "Hi,  Please help me, as i have transferred some amount but receiver did not get the same amount. He received a bit less. Due to this again i need to transfer the difference.   I have transferred money but beneficiary's account is credited with less amount. Now i have transfer the difference of the amount. I think there is some issue, could you please look into this.", "expected": {"category": "transfer_fee_charged"}}
+{"id": "b042", "input": "How old do I have to be?", "expected": {"category": "age_limit"}}
+{"id": "b043", "input": "How do I top up my card?", "expected": {"category": "transfer_into_account"}}
+{"id": "b044", "input": "Is my PIN located on my account somewhere?", "expected": {"category": "get_physical_card"}}
+{"id": "b045", "input": "Why did my transfer fail?", "expected": {"category": "failed_transfer"}}
+{"id": "b046", "input": "Is there a discount for frequently exchanging currencies?", "expected": {"category": "exchange_charge"}}
+{"id": "b047", "input": "Can you tell me the limits for top ups?", "expected": {"category": "top_up_limits"}}
+{"id": "b048", "input": "I was wondering whether exchanging currencies can be done on this app.", "expected": {"category": "exchange_via_app"}}
+{"id": "b049", "input": "What is the verification code on a top-up?", "expected": {"category": "verify_top_up"}}
+{"id": "b050", "input": "How can I transfer money from an outside bank?", "expected": {"category": "transfer_into_account"}}

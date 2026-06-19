@@ -9,7 +9,7 @@ from __future__ import annotations
 import os
 import time
 
-from .base import LLMResponse, Provider, cost_usd, register_provider
+from .base import LLMResponse, Provider, cost_usd, register_provider, with_retry
 
 # USD per 1M tokens (input, output). Extend as needed.
 PRICES = {
@@ -42,17 +42,18 @@ class AnthropicProvider(Provider):
             "messages": [{"role": "user", "content": prompt}],
         }
         t0 = time.perf_counter()
-        resp = requests.post(
-            url,
-            headers={
-                "x-api-key": key,
-                "anthropic-version": "2023-06-01",
-                "content-type": "application/json",
-            },
-            json=body,
-            timeout=params.get("timeout", 60),
+        resp = with_retry(
+            lambda: requests.post(
+                url,
+                headers={
+                    "x-api-key": key,
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                },
+                json=body,
+                timeout=params.get("timeout", 60),
+            )
         )
-        resp.raise_for_status()
         latency_ms = (time.perf_counter() - t0) * 1000
         data = resp.json()
 
