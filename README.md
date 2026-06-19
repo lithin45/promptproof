@@ -26,20 +26,25 @@ one of 77 intents. It pits a **basic vs few-shot** prompt against
 
 **Actual output** (50 test cases, `temperature=0`, scored by PromptProof):
 
-| Target | Accuracy | Pass rate | Cost (50 cases) |
+| Target | Accuracy (exact-match) | Weighted score | Cost (50 cases) |
 |---|---|---|---|
-| claude-sonnet-4-6 + basic   | **0.910** | 88% | $0.110 |
-| claude-sonnet-4-6 + fewshot | **0.910** | 88% | $0.122 |
-| claude-haiku-4-5 + basic    | 0.865 | 82% | **$0.038** |
-| claude-haiku-4-5 + fewshot  | 0.850 | 80% | $0.042 |
+| claude-sonnet-4-6 + basic   | **88%** (44/50) | 0.910 | $0.110 |
+| claude-sonnet-4-6 + fewshot | **88%** (44/50) | 0.910 | $0.122 |
+| claude-haiku-4-5 + basic    | 82% (41/50) | 0.865 | **$0.038** |
+| claude-haiku-4-5 + fewshot  | 80% (40/50) | 0.850 | $0.042 |
+
+*Accuracy* = exact-match on the intent label. *Weighted score* (what the
+dashboard plots) also gives partial credit for returning a valid-but-wrong
+label, so it sits a little higher than raw accuracy.
 
 What the measurement surfaced — none of it obvious in advance:
 
-- **Few-shot examples didn't pay off here.** Sonnet scored *identically* with or
-  without them (the basic prompt is cheaper), and on Haiku few-shot was slightly
-  *worse* (0.865 → 0.850). The 3 examples added input cost for no accuracy gain.
-- **Sonnet beat Haiku by ~5 points** (0.910 vs 0.865) — model size mattered, but modestly.
-- **Best value: Haiku + basic — 86.5% at ~1/3 the cost** of Sonnet. Whether
+- **Few-shot examples didn't pay off here.** Sonnet got the *exact same* 44/50
+  (88%) with or without them — the basic prompt is simply cheaper. On Haiku,
+  few-shot was slightly *worse* (82% → 80%). The 3 examples added input cost for
+  no accuracy gain.
+- **Sonnet beat Haiku by ~6 points** (88% vs 82%) — model size mattered, but modestly.
+- **Best value: Haiku + basic — 82% at ~1/3 the cost** of Sonnet. Whether
   that trade is worth it is now a *decision you can see*, not a guess.
 
 > Methodology / honesty: a 50-case sample at `temperature=0`, single run — treat
