@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+*.pyc
+
+# Node / Next.js dashboard
+node_modules/
+.next/
+out/
+dist/
+
+# Local eval runs are throwaway; the committed BASELINE is what CI compares to,
+# so we keep .promptproof/baselines/ but ignore the per-run history.
+.promptproof/runs/
+
+# OS
+.DS_Store

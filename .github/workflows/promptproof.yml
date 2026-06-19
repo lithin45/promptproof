@@ -1,0 +1,35 @@
+name: promptproof eval gate
+
+# Runs the eval suite on every PR and fails the check if quality regresses
+# against the committed baseline (.promptproof/baselines/). This turns the eval
+# into a release gate — the same way unit tests gate code.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e .
+
+      - name: Run eval gate
+        # Exits non-zero if the suite regressed vs the committed baseline.
+        run: promptproof run examples/support_ticket_triage/suite.yaml --fail-on-regression
+
+      - name: Publish run history (artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promptproof-runs
+          path: .promptproof/runs/

@@ -1,0 +1,62 @@
+name: Support Ticket Triage
+description: >
+  Same suite as suite.yaml, but the "large + fewshot" target points at a
+  *regressed* prompt (v3) that renamed `category` -> `type` and dropped
+  `needs_human` — a realistic refactor mistake. Run this as the candidate and
+  `promptproof compare` will catch the regression and exit non-zero.
+dataset: dataset.jsonl
+
+targets:
+  - id: "small + basic"
+    provider: mock
+    model: mock-small
+    prompt: prompts/v1_basic.txt
+  - id: "small + fewshot"
+    provider: mock
+    model: mock-small
+    prompt: prompts/v2_fewshot.txt
+  - id: "large + basic"
+    provider: mock
+    model: mock-large
+    prompt: prompts/v1_basic.txt
+  - id: "large + fewshot"        # <-- same target id, broken prompt
+    provider: mock
+    model: mock-large
+    prompt: prompts/v3_regressed.txt
+
+scorers:
+  - name: json_schema
+    weight: 1
+    config:
+      required: [category, priority, sentiment, needs_human, summary]
+      properties:
+        category: { type: string, enum: [billing, bug, feature_request, account, other] }
+        priority: { type: string, enum: [P0, P1, P2, P3] }
+        sentiment: { type: string, enum: [positive, neutral, negative] }
+        needs_human: { type: boolean }
+        summary: { type: string }
+  - name: field_exact
+    weight: 2
+    config: { field: category }
+  - name: field_tolerance
+    weight: 1
+    config:
+      field: priority
+      tolerance: 1
+      range: 3
+      mapping: { P0: 0, P1: 1, P2: 2, P3: 3 }
+  - name: field_exact
+    weight: 1
+    config: { field: sentiment }
+  - name: llm_judge
+    weight: 1
+    config:
+      field: summary
+      reference_key: summary
+      provider: mock
+      model: mock-large
+      threshold: 0.4
+
+thresholds:
+  max_score_drop: 0.02
+  max_pass_rate_drop: 0.05

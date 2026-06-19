@@ -1,0 +1,3193 @@
+{
+  "run_id": "support-ticket-triage-20260619-110242-58fa",
+  "suite_name": "Support Ticket Triage",
+  "created_at": "2026-06-19T11:02:42.244",
+  "targets": [
+    {
+      "target_id": "small + basic",
+      "provider": "mock",
+      "model": "mock-small",
+      "cases": [
+        {
+          "case_id": "t01",
+          "input": "I'd like a refund for the duplicate charge on last month's invoice.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I'd like a refund for the duplicate charge on\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I'd like a refund for the duplicate charge on"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.66,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.38 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9433,
+          "passed": true,
+          "tokens_in": 118,
+          "tokens_out": 50,
+          "cost_usd": 4.8e-05,
+          "latency_ms": 263.0,
+          "error": null
+        },
+        {
+          "case_id": "t02",
+          "input": "The app crashes with a 500 error whenever I upload a file.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The app crashes with a 500 error whenever I\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The app crashes with a 500 error whenever I"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 0.6666666666666667,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-2|=1 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.86,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.56 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9211,
+          "passed": true,
+          "tokens_in": 116,
+          "tokens_out": 49,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 329.0,
+          "error": null
+        },
+        {
+          "case_id": "t03",
+          "input": "I forgot my password and the reset email never arrives.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I forgot my password and the reset email never\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I forgot my password and the reset email never"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.94,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.62 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.99,
+          "passed": true,
+          "tokens_in": 115,
+          "tokens_out": 50,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 243.0,
+          "error": null
+        },
+        {
+          "case_id": "t04",
+          "input": "Please add dark mode, it would help a lot at night.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Please add dark mode, it would help a lot\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Please add dark mode, it would help a lot"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 114,
+          "tokens_out": 51,
+          "cost_usd": 4.8e-05,
+          "latency_ms": 389.0,
+          "error": null
+        },
+        {
+          "case_id": "t05",
+          "input": "Just wanted to say thanks, the latest update is awesome!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"positive\",\n  \"needs_human\": false,\n  \"summary\": \"Just wanted to say thanks, the latest update is\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "positive",
+            "needs_human": false,
+            "summary": "Just wanted to say thanks, the latest update is"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'other', expected 'other'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'positive', expected 'positive'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 116,
+          "tokens_out": 50,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 408.0,
+          "error": null
+        },
+        {
+          "case_id": "t06",
+          "input": "URGENT: production is down with a 500 error for all users, total outage.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P0\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"URGENT: production is down with a 500 error for\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P0",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "URGENT: production is down with a 500 error for"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|0-0|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.8,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.50 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9667,
+          "passed": true,
+          "tokens_in": 120,
+          "tokens_out": 49,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 277.0,
+          "error": null
+        },
+        {
+          "case_id": "t07",
+          "input": "This is urgent, I'm blocked and can't work until you fix the wrong charge.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P1\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"This is urgent, I'm blocked and can't work until\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P1",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "This is urgent, I'm blocked and can't work until"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|1-1|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 120,
+          "tokens_out": 51,
+          "cost_usd": 4.9e-05,
+          "latency_ms": 396.0,
+          "error": null
+        },
+        {
+          "case_id": "t08",
+          "input": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Minor suggestion, no rush: it would be nice to\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Minor suggestion, no rush: it would be nice to"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-3|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.45,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.18 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9083,
+          "passed": true,
+          "tokens_in": 121,
+          "tokens_out": 52,
+          "cost_usd": 4.9e-05,
+          "latency_ms": 422.0,
+          "error": null
+        },
+        {
+          "case_id": "t09",
+          "input": "Absolutely unacceptable, I've been charged twice and I'm furious!!!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": true,\n  \"summary\": \"Absolutely unacceptable, I've been charged twice and I'm furious!!!\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": true,
+            "summary": "Absolutely unacceptable, I've been charged twice and I'm furious!!!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 118,
+          "tokens_out": 56,
+          "cost_usd": 5.1e-05,
+          "latency_ms": 368.0,
+          "error": null
+        },
+        {
+          "case_id": "t10",
+          "input": "My annual plan just renewed but I never wanted to keep it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"My annual plan just renewed but I never wanted\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "My annual plan just renewed but I never wanted"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.6033,
+          "passed": false,
+          "tokens_in": 116,
+          "tokens_out": 50,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 386.0,
+          "error": null
+        },
+        {
+          "case_id": "t11",
+          "input": "The reports page shows a blank screen and keeps spinning after I open it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The reports page shows a blank screen and keeps\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The reports page shows a blank screen and keeps"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.86 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.6667,
+          "passed": false,
+          "tokens_in": 120,
+          "tokens_out": 50,
+          "cost_usd": 4.8e-05,
+          "latency_ms": 342.0,
+          "error": null
+        },
+        {
+          "case_id": "t12",
+          "input": "Any plans to let us export to CSV? Right now there's no option to do it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Any plans to let us export to CSV? Right\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Any plans to let us export to CSV? Right"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.49,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.21 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.5817,
+          "passed": false,
+          "tokens_in": 120,
+          "tokens_out": 48,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 257.0,
+          "error": null
+        },
+        {
+          "case_id": "t13",
+          "input": "I can't get into my workspace even after the SSO redirect loops.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"I can't get into my workspace even after the\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "I can't get into my workspace even after the"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.6033,
+          "passed": false,
+          "tokens_in": 118,
+          "tokens_out": 49,
+          "cost_usd": 4.7e-05,
+          "latency_ms": 293.0,
+          "error": null
+        },
+        {
+          "case_id": "t14",
+          "input": "Your latest release is terrible, the editor keeps crashing and I lose my work.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": false,\n  \"summary\": \"Your latest release is terrible, the editor keeps crashing\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": false,
+            "summary": "Your latest release is terrible, the editor keeps crashing"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.86,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.56 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9767,
+          "passed": true,
+          "tokens_in": 121,
+          "tokens_out": 53,
+          "cost_usd": 5e-05,
+          "latency_ms": 366.0,
+          "error": null
+        }
+      ],
+      "mean_score": 0.8481,
+      "pass_rate": 0.7143,
+      "total_cost_usd": 0.000672,
+      "mean_latency_ms": 338.5,
+      "total_tokens": 2361
+    },
+    {
+      "target_id": "small + fewshot",
+      "provider": "mock",
+      "model": "mock-small",
+      "cases": [
+        {
+          "case_id": "t01",
+          "input": "I'd like a refund for the duplicate charge on last month's invoice.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I'd like a refund for the duplicate charge on\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I'd like a refund for the duplicate charge on"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.66,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.38 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9433,
+          "passed": true,
+          "tokens_in": 229,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 384.0,
+          "error": null
+        },
+        {
+          "case_id": "t02",
+          "input": "The app crashes with a 500 error whenever I upload a file.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The app crashes with a 500 error whenever I\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The app crashes with a 500 error whenever I"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 0.6666666666666667,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-2|=1 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.86,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.56 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9211,
+          "passed": true,
+          "tokens_in": 227,
+          "tokens_out": 49,
+          "cost_usd": 6.3e-05,
+          "latency_ms": 293.0,
+          "error": null
+        },
+        {
+          "case_id": "t03",
+          "input": "I forgot my password and the reset email never arrives.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I forgot my password and the reset email never\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I forgot my password and the reset email never"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.94,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.62 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.99,
+          "passed": true,
+          "tokens_in": 226,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 295.0,
+          "error": null
+        },
+        {
+          "case_id": "t04",
+          "input": "Please add dark mode, it would help a lot at night.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Please add dark mode, it would help a lot\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Please add dark mode, it would help a lot"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 225,
+          "tokens_out": 51,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 284.0,
+          "error": null
+        },
+        {
+          "case_id": "t05",
+          "input": "Just wanted to say thanks, the latest update is awesome!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"positive\",\n  \"needs_human\": false,\n  \"summary\": \"Just wanted to say thanks, the latest update is\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "positive",
+            "needs_human": false,
+            "summary": "Just wanted to say thanks, the latest update is"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'other', expected 'other'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'positive', expected 'positive'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 226,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 430.0,
+          "error": null
+        },
+        {
+          "case_id": "t06",
+          "input": "URGENT: production is down with a 500 error for all users, total outage.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P0\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"URGENT: production is down with a 500 error for\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P0",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "URGENT: production is down with a 500 error for"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|0-0|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.8,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.50 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9667,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 49,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 414.0,
+          "error": null
+        },
+        {
+          "case_id": "t07",
+          "input": "This is urgent, I'm blocked and can't work until you fix the wrong charge.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P1\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"This is urgent, I'm blocked and can't work until\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P1",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "This is urgent, I'm blocked and can't work until"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|1-1|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 231,
+          "tokens_out": 51,
+          "cost_usd": 6.5e-05,
+          "latency_ms": 362.0,
+          "error": null
+        },
+        {
+          "case_id": "t08",
+          "input": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Minor suggestion, no rush: it would be nice to\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Minor suggestion, no rush: it would be nice to"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-3|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.45,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.18 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9083,
+          "passed": true,
+          "tokens_in": 232,
+          "tokens_out": 52,
+          "cost_usd": 6.6e-05,
+          "latency_ms": 424.0,
+          "error": null
+        },
+        {
+          "case_id": "t09",
+          "input": "Absolutely unacceptable, I've been charged twice and I'm furious!!!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": true,\n  \"summary\": \"Absolutely unacceptable, I've been charged twice and I'm furious!!!\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": true,
+            "summary": "Absolutely unacceptable, I've been charged twice and I'm furious!!!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 229,
+          "tokens_out": 56,
+          "cost_usd": 6.8e-05,
+          "latency_ms": 380.0,
+          "error": null
+        },
+        {
+          "case_id": "t10",
+          "input": "My annual plan just renewed but I never wanted to keep it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"My annual plan just renewed but I never wanted\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "My annual plan just renewed but I never wanted"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 227,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 294.0,
+          "error": null
+        },
+        {
+          "case_id": "t11",
+          "input": "The reports page shows a blank screen and keeps spinning after I open it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The reports page shows a blank screen and keeps\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The reports page shows a blank screen and keeps"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.86 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 286.0,
+          "error": null
+        },
+        {
+          "case_id": "t12",
+          "input": "Any plans to let us export to CSV? Right now there's no option to do it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Any plans to let us export to CSV? Right\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Any plans to let us export to CSV? Right"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.49,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.21 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.915,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 51,
+          "cost_usd": 6.5e-05,
+          "latency_ms": 302.0,
+          "error": null
+        },
+        {
+          "case_id": "t13",
+          "input": "I can't get into my workspace even after the SSO redirect loops.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I can't get into my workspace even after the\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I can't get into my workspace even after the"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 228,
+          "tokens_out": 50,
+          "cost_usd": 6.4e-05,
+          "latency_ms": 385.0,
+          "error": null
+        },
+        {
+          "case_id": "t14",
+          "input": "Your latest release is terrible, the editor keeps crashing and I lose my work.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": false,\n  \"summary\": \"Your latest release is terrible, the editor keeps crashing\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": false,
+            "summary": "Your latest release is terrible, the editor keeps crashing"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.86,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.56 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9767,
+          "passed": true,
+          "tokens_in": 232,
+          "tokens_out": 53,
+          "cost_usd": 6.7e-05,
+          "latency_ms": 297.0,
+          "error": null
+        }
+      ],
+      "mean_score": 0.9433,
+      "pass_rate": 1.0,
+      "total_cost_usd": 0.000906,
+      "mean_latency_ms": 345.0,
+      "total_tokens": 3914
+    },
+    {
+      "target_id": "large + basic",
+      "provider": "mock",
+      "model": "mock-large",
+      "cases": [
+        {
+          "case_id": "t01",
+          "input": "I'd like a refund for the duplicate charge on last month's invoice.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I'd like a refund for the duplicate charge on last month's invoice.\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I'd like a refund for the duplicate charge on last month's invoice."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.69,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.40 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9483,
+          "passed": true,
+          "tokens_in": 118,
+          "tokens_out": 55,
+          "cost_usd": 0.001179,
+          "latency_ms": 843.0,
+          "error": null
+        },
+        {
+          "case_id": "t02",
+          "input": "The app crashes with a 500 error whenever I upload a file.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The app crashes with a 500 error whenever I upload a file.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The app crashes with a 500 error whenever I upload a file."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 0.6666666666666667,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-2|=1 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.91,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.60 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9294,
+          "passed": true,
+          "tokens_in": 116,
+          "tokens_out": 52,
+          "cost_usd": 0.001128,
+          "latency_ms": 909.0,
+          "error": null
+        },
+        {
+          "case_id": "t03",
+          "input": "I forgot my password and the reset email never arrives.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I forgot my password and the reset email never arrives.\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I forgot my password and the reset email never arrives."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.75 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 115,
+          "tokens_out": 52,
+          "cost_usd": 0.001125,
+          "latency_ms": 823.0,
+          "error": null
+        },
+        {
+          "case_id": "t04",
+          "input": "Please add dark mode, it would help a lot at night.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Please add dark mode, it would help a lot at night.\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Please add dark mode, it would help a lot at night."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 114,
+          "tokens_out": 54,
+          "cost_usd": 0.001152,
+          "latency_ms": 969.0,
+          "error": null
+        },
+        {
+          "case_id": "t05",
+          "input": "Just wanted to say thanks, the latest update is awesome!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"positive\",\n  \"needs_human\": false,\n  \"summary\": \"Just wanted to say thanks, the latest update is awesome!\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "positive",
+            "needs_human": false,
+            "summary": "Just wanted to say thanks, the latest update is awesome!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'other', expected 'other'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'positive', expected 'positive'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.74,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.44 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9567,
+          "passed": true,
+          "tokens_in": 116,
+          "tokens_out": 53,
+          "cost_usd": 0.001143,
+          "latency_ms": 988.0,
+          "error": null
+        },
+        {
+          "case_id": "t06",
+          "input": "URGENT: production is down with a 500 error for all users, total outage.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P0\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"URGENT: production is down with a 500 error for all users, total outage.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P0",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "URGENT: production is down with a 500 error for all users, total outage."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|0-0|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.90 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 120,
+          "tokens_out": 56,
+          "cost_usd": 0.0012,
+          "latency_ms": 857.0,
+          "error": null
+        },
+        {
+          "case_id": "t07",
+          "input": "This is urgent, I'm blocked and can't work until you fix the wrong charge.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P1\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"This is urgent, I'm blocked and can't work until you fix the wrong charge.\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P1",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "This is urgent, I'm blocked and can't work until you fix the wrong charge."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|1-1|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.67,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.38 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.945,
+          "passed": true,
+          "tokens_in": 120,
+          "tokens_out": 57,
+          "cost_usd": 0.001215,
+          "latency_ms": 976.0,
+          "error": null
+        },
+        {
+          "case_id": "t08",
+          "input": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-3|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.71,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.42 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9517,
+          "passed": true,
+          "tokens_in": 121,
+          "tokens_out": 61,
+          "cost_usd": 0.001278,
+          "latency_ms": 1002.0,
+          "error": null
+        },
+        {
+          "case_id": "t09",
+          "input": "Absolutely unacceptable, I've been charged twice and I'm furious!!!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": true,\n  \"summary\": \"Absolutely unacceptable, I've been charged twice and I'm furious!!!\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": true,
+            "summary": "Absolutely unacceptable, I've been charged twice and I'm furious!!!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 118,
+          "tokens_out": 56,
+          "cost_usd": 0.001194,
+          "latency_ms": 948.0,
+          "error": null
+        },
+        {
+          "case_id": "t10",
+          "input": "My annual plan just renewed but I never wanted to keep it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"My annual plan just renewed but I never wanted to keep it.\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "My annual plan just renewed but I never wanted to keep it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.59,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.31 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.5983,
+          "passed": false,
+          "tokens_in": 116,
+          "tokens_out": 53,
+          "cost_usd": 0.001143,
+          "latency_ms": 966.0,
+          "error": null
+        },
+        {
+          "case_id": "t11",
+          "input": "The reports page shows a blank screen and keeps spinning after I open it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The reports page shows a blank screen and keeps spinning after I open it.\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The reports page shows a blank screen and keeps spinning after I open it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.78 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.6667,
+          "passed": false,
+          "tokens_in": 120,
+          "tokens_out": 57,
+          "cost_usd": 0.001215,
+          "latency_ms": 922.0,
+          "error": null
+        },
+        {
+          "case_id": "t12",
+          "input": "Any plans to let us export to CSV? Right now there's no option to do it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Any plans to let us export to CSV? Right now there's no option to do it.\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Any plans to let us export to CSV? Right now there's no option to do it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.57,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.29 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.595,
+          "passed": false,
+          "tokens_in": 120,
+          "tokens_out": 56,
+          "cost_usd": 0.0012,
+          "latency_ms": 837.0,
+          "error": null
+        },
+        {
+          "case_id": "t13",
+          "input": "I can't get into my workspace even after the SSO redirect loops.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"I can't get into my workspace even after the SSO redirect loops.\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "I can't get into my workspace even after the SSO redirect loops."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 0.0,
+              "weight": 2.0,
+              "passed": false,
+              "detail": "got 'other', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.89,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.58 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.6483,
+          "passed": false,
+          "tokens_in": 118,
+          "tokens_out": 54,
+          "cost_usd": 0.001164,
+          "latency_ms": 873.0,
+          "error": null
+        },
+        {
+          "case_id": "t14",
+          "input": "Your latest release is terrible, the editor keeps crashing and I lose my work.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": false,\n  \"summary\": \"Your latest release is terrible, the editor keeps crashing and I lose my work.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": false,
+            "summary": "Your latest release is terrible, the editor keeps crashing and I lose my work."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.91,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.60 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.985,
+          "passed": true,
+          "tokens_in": 121,
+          "tokens_out": 58,
+          "cost_usd": 0.001233,
+          "latency_ms": 946.0,
+          "error": null
+        }
+      ],
+      "mean_score": 0.8633,
+      "pass_rate": 0.7143,
+      "total_cost_usd": 0.016569,
+      "mean_latency_ms": 918.5,
+      "total_tokens": 2427
+    },
+    {
+      "target_id": "large + fewshot",
+      "provider": "mock",
+      "model": "mock-large",
+      "cases": [
+        {
+          "case_id": "t01",
+          "input": "I'd like a refund for the duplicate charge on last month's invoice.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I'd like a refund for the duplicate charge on last month's invoice.\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I'd like a refund for the duplicate charge on last month's invoice."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.69,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.40 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9483,
+          "passed": true,
+          "tokens_in": 229,
+          "tokens_out": 55,
+          "cost_usd": 0.001512,
+          "latency_ms": 964.0,
+          "error": null
+        },
+        {
+          "case_id": "t02",
+          "input": "The app crashes with a 500 error whenever I upload a file.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The app crashes with a 500 error whenever I upload a file.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The app crashes with a 500 error whenever I upload a file."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 0.6666666666666667,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-2|=1 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.91,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.60 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9294,
+          "passed": true,
+          "tokens_in": 227,
+          "tokens_out": 52,
+          "cost_usd": 0.001461,
+          "latency_ms": 873.0,
+          "error": null
+        },
+        {
+          "case_id": "t03",
+          "input": "I forgot my password and the reset email never arrives.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I forgot my password and the reset email never arrives.\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I forgot my password and the reset email never arrives."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.75 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 226,
+          "tokens_out": 52,
+          "cost_usd": 0.001458,
+          "latency_ms": 875.0,
+          "error": null
+        },
+        {
+          "case_id": "t04",
+          "input": "Please add dark mode, it would help a lot at night.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Please add dark mode, it would help a lot at night.\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Please add dark mode, it would help a lot at night."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.62,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.33 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9367,
+          "passed": true,
+          "tokens_in": 225,
+          "tokens_out": 54,
+          "cost_usd": 0.001485,
+          "latency_ms": 864.0,
+          "error": null
+        },
+        {
+          "case_id": "t05",
+          "input": "Just wanted to say thanks, the latest update is awesome!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"other\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"positive\",\n  \"needs_human\": false,\n  \"summary\": \"Just wanted to say thanks, the latest update is awesome!\"\n}\n```",
+          "parsed": {
+            "category": "other",
+            "priority": "P2",
+            "sentiment": "positive",
+            "needs_human": false,
+            "summary": "Just wanted to say thanks, the latest update is awesome!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'other', expected 'other'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'positive', expected 'positive'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.74,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.44 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9567,
+          "passed": true,
+          "tokens_in": 226,
+          "tokens_out": 53,
+          "cost_usd": 0.001473,
+          "latency_ms": 1010.0,
+          "error": null
+        },
+        {
+          "case_id": "t06",
+          "input": "URGENT: production is down with a 500 error for all users, total outage.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P0\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"URGENT: production is down with a 500 error for all users, total outage.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P0",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "URGENT: production is down with a 500 error for all users, total outage."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|0-0|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.90 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 56,
+          "cost_usd": 0.00153,
+          "latency_ms": 994.0,
+          "error": null
+        },
+        {
+          "case_id": "t07",
+          "input": "This is urgent, I'm blocked and can't work until you fix the wrong charge.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P1\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"This is urgent, I'm blocked and can't work until you fix the wrong charge.\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P1",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "This is urgent, I'm blocked and can't work until you fix the wrong charge."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|1-1|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.67,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.38 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.945,
+          "passed": true,
+          "tokens_in": 231,
+          "tokens_out": 57,
+          "cost_usd": 0.001548,
+          "latency_ms": 942.0,
+          "error": null
+        },
+        {
+          "case_id": "t08",
+          "input": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P3\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday.\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P3",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Minor suggestion, no rush: it would be nice to have keyboard shortcuts someday."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|3-3|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.71,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.42 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9517,
+          "passed": true,
+          "tokens_in": 232,
+          "tokens_out": 61,
+          "cost_usd": 0.001611,
+          "latency_ms": 1004.0,
+          "error": null
+        },
+        {
+          "case_id": "t09",
+          "input": "Absolutely unacceptable, I've been charged twice and I'm furious!!!",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": true,\n  \"summary\": \"Absolutely unacceptable, I've been charged twice and I'm furious!!!\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": true,
+            "summary": "Absolutely unacceptable, I've been charged twice and I'm furious!!!"
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.55,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.27 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.925,
+          "passed": true,
+          "tokens_in": 229,
+          "tokens_out": 56,
+          "cost_usd": 0.001527,
+          "latency_ms": 960.0,
+          "error": null
+        },
+        {
+          "case_id": "t10",
+          "input": "My annual plan just renewed but I never wanted to keep it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"billing\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"My annual plan just renewed but I never wanted to keep it.\"\n}\n```",
+          "parsed": {
+            "category": "billing",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "My annual plan just renewed but I never wanted to keep it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'billing', expected 'billing'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.59,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.31 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9317,
+          "passed": true,
+          "tokens_in": 227,
+          "tokens_out": 53,
+          "cost_usd": 0.001476,
+          "latency_ms": 874.0,
+          "error": null
+        },
+        {
+          "case_id": "t11",
+          "input": "The reports page shows a blank screen and keeps spinning after I open it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"The reports page shows a blank screen and keeps spinning after I open it.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "The reports page shows a blank screen and keeps spinning after I open it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.78 with the reference summary"
+            }
+          ],
+          "weighted_score": 1.0,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 56,
+          "cost_usd": 0.00153,
+          "latency_ms": 866.0,
+          "error": null
+        },
+        {
+          "case_id": "t12",
+          "input": "Any plans to let us export to CSV? Right now there's no option to do it.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"feature_request\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": false,\n  \"summary\": \"Any plans to let us export to CSV? Right now there's no option to do it.\"\n}\n```",
+          "parsed": {
+            "category": "feature_request",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": false,
+            "summary": "Any plans to let us export to CSV? Right now there's no option to do it."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'feature_request', expected 'feature_request'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.57,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.29 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9283,
+          "passed": true,
+          "tokens_in": 230,
+          "tokens_out": 59,
+          "cost_usd": 0.001575,
+          "latency_ms": 882.0,
+          "error": null
+        },
+        {
+          "case_id": "t13",
+          "input": "I can't get into my workspace even after the SSO redirect loops.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"account\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"neutral\",\n  \"needs_human\": true,\n  \"summary\": \"I can't get into my workspace even after the SSO redirect loops.\"\n}\n```",
+          "parsed": {
+            "category": "account",
+            "priority": "P2",
+            "sentiment": "neutral",
+            "needs_human": true,
+            "summary": "I can't get into my workspace even after the SSO redirect loops."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'account', expected 'account'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'neutral', expected 'neutral'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.89,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.58 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.9817,
+          "passed": true,
+          "tokens_in": 228,
+          "tokens_out": 55,
+          "cost_usd": 0.001509,
+          "latency_ms": 965.0,
+          "error": null
+        },
+        {
+          "case_id": "t14",
+          "input": "Your latest release is terrible, the editor keeps crashing and I lose my work.",
+          "output": "Here is the structured result:\n```json\n{\n  \"category\": \"bug\",\n  \"priority\": \"P2\",\n  \"sentiment\": \"negative\",\n  \"needs_human\": false,\n  \"summary\": \"Your latest release is terrible, the editor keeps crashing and I lose my work.\"\n}\n```",
+          "parsed": {
+            "category": "bug",
+            "priority": "P2",
+            "sentiment": "negative",
+            "needs_human": false,
+            "summary": "Your latest release is terrible, the editor keeps crashing and I lose my work."
+          },
+          "scores": [
+            {
+              "scorer": "json_schema",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "schema ok"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 2.0,
+              "passed": true,
+              "detail": "got 'bug', expected 'bug'"
+            },
+            {
+              "scorer": "field_tolerance",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "|2-2|=0 (tol 1)"
+            },
+            {
+              "scorer": "field_exact",
+              "score": 1.0,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "got 'negative', expected 'negative'"
+            },
+            {
+              "scorer": "llm_judge",
+              "score": 0.91,
+              "weight": 1.0,
+              "passed": true,
+              "detail": "lexical overlap 0.60 with the reference summary"
+            }
+          ],
+          "weighted_score": 0.985,
+          "passed": true,
+          "tokens_in": 232,
+          "tokens_out": 58,
+          "cost_usd": 0.001566,
+          "latency_ms": 877.0,
+          "error": null
+        }
+      ],
+      "mean_score": 0.9585,
+      "pass_rate": 1.0,
+      "total_cost_usd": 0.021261,
+      "mean_latency_ms": 925.0,
+      "total_tokens": 3979
+    }
+  ],
+  "git_sha": null,
+  "notes": "wk1: v2 few-shot baseline"
+}

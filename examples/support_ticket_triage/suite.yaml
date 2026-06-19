@@ -1,0 +1,68 @@
+name: Support Ticket Triage
+description: >
+  Classify inbound support tickets into a structured JSON object. We pit two
+  prompts (basic vs few-shot) against two model tiers (small vs large) so the
+  leaderboard shows how prompt quality and model size trade off against cost
+  and latency. Runs fully offline on the MockProvider.
+dataset: dataset.jsonl
+
+targets:
+  - id: "small + basic"
+    provider: mock
+    model: mock-small
+    prompt: prompts/v1_basic.txt
+  - id: "small + fewshot"
+    provider: mock
+    model: mock-small
+    prompt: prompts/v2_fewshot.txt
+  - id: "large + basic"
+    provider: mock
+    model: mock-large
+    prompt: prompts/v1_basic.txt
+  - id: "large + fewshot"
+    provider: mock
+    model: mock-large
+    prompt: prompts/v2_fewshot.txt
+
+scorers:
+  # 1. Is the output well-formed and in the expected shape?
+  - name: json_schema
+    weight: 1
+    config:
+      required: [category, priority, sentiment, needs_human, summary]
+      properties:
+        category: { type: string, enum: [billing, bug, feature_request, account, other] }
+        priority: { type: string, enum: [P0, P1, P2, P3] }
+        sentiment: { type: string, enum: [positive, neutral, negative] }
+        needs_human: { type: boolean }
+        summary: { type: string }
+  # 2. Did it pick the right category? (weighted highest — it's the core task)
+  - name: field_exact
+    weight: 2
+    config: { field: category }
+  # 3. Priority within one level is acceptable.
+  - name: field_tolerance
+    weight: 1
+    config:
+      field: priority
+      tolerance: 1
+      range: 3
+      mapping: { P0: 0, P1: 1, P2: 2, P3: 3 }
+  # 4. Sentiment exact.
+  - name: field_exact
+    weight: 1
+    config: { field: sentiment }
+  # 5. Summary quality, graded by an LLM judge (mock offline).
+  - name: llm_judge
+    weight: 1
+    config:
+      field: summary
+      reference_key: summary
+      provider: mock
+      model: mock-large
+      threshold: 0.4
+
+# A regression trips if mean score drops > 2% or pass rate drops > 5%.
+thresholds:
+  max_score_drop: 0.02
+  max_pass_rate_drop: 0.05
